@@ -24,4 +24,34 @@ app.use(express.static('website'));
 
 
 // Setup Server
-console.log('running');
+const port = 8000;
+
+//Function to listen to the server
+function listening(){
+    console.log("server running"); 
+    console.log(`running on localhost: ${port}`);
+}
+
+const server = app.listen(port, listening);
+
+const data = [];
+
+//GET Request to save data
+app.get('/all', (req, res) => {
+    res.send(projectData);
+    console.log(projectData);
+  })
+
+//POST Request to store data in the correct format
+app.post('/records', function (req, res) {
+    let newData = req.body;
+      
+    projectData.temp = newData.temp;
+    projectData.date = newData.date;
+    projectData.feeling = newData.feeling;
+  
+    
+    data.push(projectData);
+    //console.log(projectData);
+  })
+  
